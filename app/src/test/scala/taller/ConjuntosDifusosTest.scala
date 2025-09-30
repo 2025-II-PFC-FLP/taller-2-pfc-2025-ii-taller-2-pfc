@@ -94,5 +94,75 @@ class ConjuntosDifusosTest extends AnyFunSuite {
     val noGrandes = cj.complemento(grandes)
     assert(Math.abs(noGrandes(50) - (1 - grandes(50))) < 0.01)
   }
-}
+  // TESTS PARA UNION
+  test("union de conjuntos con parámetros distintos y x=18") {
+    val grandes = cj.grande(8, 8)
+    val masGrande = cj.grande(15, 9)
+    val unionConjuntos = cj.union(grandes, masGrande)
+    assert(Math.abs(unionConjuntos(18) - Math.max(grandes(18), masGrande(18))) < 0.01)
+  }
 
+  test("union de conjuntos con parámetros distintos y x=50") {
+    val grandes = cj.grande(10, 13)
+    val masGrande = cj.grande(20, 11)
+    val unionConjuntos = cj.union(grandes, masGrande)
+    assert(Math.abs(unionConjuntos(50) - Math.max(grandes(50), masGrande(50))) < 0.01)
+  }
+
+  test("union de conjuntos con parámetros distintos y x=5") {
+    val grandes = cj.grande(3, 5)
+    val masGrande = cj.grande(7, 4)
+    val unionConjuntos = cj.union(grandes, masGrande)
+    assert(Math.abs(unionConjuntos(5) - Math.max(grandes(5), masGrande(5))) < 0.01)
+  }
+
+  test("union de conjuntos con parámetros invertidos y x=25") {
+    val grandes = cj.grande(12, 6)
+    val masGrande = cj.grande(6, 12)
+    val unionConjuntos = cj.union(grandes, masGrande)
+    assert(Math.abs(unionConjuntos(25) - Math.max(grandes(25), masGrande(25))) < 0.01)
+  }
+
+  test("union de conjuntos con valores grandes y x=100") {
+    val grandes = cj.grande(50, 10)
+    val masGrande = cj.grande(100, 8)
+    val unionConjuntos = cj.union(grandes, masGrande)
+    assert(Math.abs(unionConjuntos(100) - Math.max(grandes(100), masGrande(100))) < 0.01)
+  }
+
+  // TESTS PARA INTERSECCION
+  test("interseccion de conjuntos con parámetros distintos y x=18") {
+    val grandes = cj.grande(8, 8)
+    val masGrande = cj.grande(15, 9)
+    val interseccionConjuntos = cj.interseccion(grandes, masGrande)
+    assert(Math.abs(interseccionConjuntos(18) - Math.min(grandes(18), masGrande(18))) < 0.01)
+  }
+
+  test("interseccion de conjuntos con parámetros distintos y x=50") {
+    val grandes = cj.grande(10, 13)
+    val masGrande = cj.grande(20, 11)
+    val interseccionConjuntos = cj.interseccion(grandes, masGrande)
+    assert(Math.abs(interseccionConjuntos(50) - Math.min(grandes(50), masGrande(50))) < 0.01)
+  }
+
+  test("interseccion de conjuntos con parámetros distintos y x=5") {
+    val grandes = cj.grande(3, 5)
+    val masGrande = cj.grande(7, 4)
+    val interseccionConjuntos = cj.interseccion(grandes, masGrande)
+    assert(Math.abs(interseccionConjuntos(5) - Math.min(grandes(5), masGrande(5))) < 0.01)
+  }
+
+  test("interseccion de conjuntos con parámetros invertidos y x=25") {
+    val grandes = cj.grande(12, 6)
+    val masGrande = cj.grande(6, 12)
+    val interseccionConjuntos = cj.interseccion(grandes, masGrande)
+    assert(Math.abs(interseccionConjuntos(25) - Math.min(grandes(25), masGrande(25))) < 0.01)
+  }
+
+  test("interseccion de conjuntos con valores grandes y x=100") {
+    val grandes = cj.grande(50, 10)
+    val masGrande = cj.grande(100, 8)
+    val interseccionConjuntos = cj.interseccion(grandes, masGrande)
+    assert(Math.abs(interseccionConjuntos(100) - Math.min(grandes(100), masGrande(100))) < 0.01)
+  }
+}

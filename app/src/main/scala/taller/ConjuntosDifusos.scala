@@ -15,15 +15,20 @@ class ConjuntosDifusos {
   def complemento(c: ConjDifuso): ConjDifuso = {
     (x: Int) => 1 - c(x)
   }
-  /*
+
   def union(cd1: ConjDifuso, cd2: ConjDifuso): ConjDifuso = {
-    // Implementaci´on de la funci´on union
-  ...
+    if (cd1 == null || cd2 == null) throw new IllegalArgumentException("Los conjuntos no pueden ser vacios")
+    else {
+      (x: Int) => Math.max(cd1(x), cd2(x))
+    }
   }
   def interseccion(cd1: ConjDifuso, cd2: ConjDifuso): ConjDifuso = {
-    // Implementaci´on de la funci´on interseccion
-  ...
+    if (cd1 == null || cd2 == null) throw new IllegalArgumentException("Los conjuntos no pueden ser vacios")
+    else {
+      (x: Int) => Math.min(cd1(x), cd2(x))
+    }
   }
+  /*
   def inclusion(cd1: ConjDifuso, cd2: ConjDifuso): Boolean = {
     // Implementaci´on de la funci´on inclusion
   ...
