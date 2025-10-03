@@ -165,4 +165,67 @@ class ConjuntosDifusosTest extends AnyFunSuite {
     val interseccionConjuntos = cj.interseccion(grandes, masGrande)
     assert(Math.abs(interseccionConjuntos(100) - Math.min(grandes(100), masGrande(100))) < 0.01)
   }
+
+  // TESTS PARA INCLUSION
+  test("inclusion de un conjunto en sí mismo debe ser true") {
+    val grandes = cj.grande(5, 3)
+    assert(cj.inclusion(grandes, grandes))
+  }
+
+  test("inclusion de un conjunto en la union con otro debe ser true") {
+    val grandes = cj.grande(5, 3)
+    val masGrandes = cj.grande(10, 3)
+    val unionConjuntos = cj.union(grandes, masGrandes)
+    assert(cj.inclusion(grandes, unionConjuntos))
+  }
+
+  test("inclusion de un conjunto en su complemento debe ser false") {
+    val grandes = cj.grande(5, 3)
+    val noGrandes = cj.complemento(grandes)
+    assert(!cj.inclusion(grandes, noGrandes))
+  }
+
+  test("inclusion de la interseccion en el primer conjunto debe ser true") {
+    val grandes = cj.grande(5, 2)
+    val masGrandes = cj.grande(7, 3)
+    val interseccionConjuntos = cj.interseccion(grandes, masGrandes)
+    assert(cj.inclusion(interseccionConjuntos, grandes))
+  }
+
+  test("inclusion de dos conjuntos iguales debe ser true") {
+    val grandes = cj.grande(7, 4)
+    val masGrandes = cj.grande(7, 4)
+    assert(cj.inclusion(grandes, masGrandes))
+  }
+
+  //TEST PARA LA IGUALDAD
+  test("igualdad de un conjunto consigo mismo debe ser true") {
+    val grandes = cj.grande(8, 5)
+    assert(cj.igualdad(grandes, grandes))
+  }
+
+  test("igualdad de dos conjuntos con mismos parámetros debe ser true") {
+    val grandes = cj.grande(10, 3)
+    val masGrandes = cj.grande(10, 3)
+    assert(cj.igualdad(grandes, masGrandes))
+  }
+
+  test("igualdad de dos conjuntos diferentes debe ser false") {
+    val grandes = cj.grande(5, 3)
+    val masGrandes = cj.grande(7, 4)
+    assert(!cj.igualdad(grandes, masGrandes))
+  }
+
+  test("igualdad entre un conjunto y su complemento debe ser false") {
+    val grandes = cj.grande(6, 2)
+    val noGrandes = cj.complemento(grandes)
+    assert(!cj.igualdad(grandes, noGrandes))
+  }
+
+  test("igualdad de conjuntos muy similares pero distintos debe ser false") {
+    val grandes = cj.grande(10, 5)
+    val masGrandes = cj.grande(10, 6)
+    assert(!cj.igualdad(grandes, masGrandes))
+  }
+
 }
