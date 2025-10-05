@@ -90,13 +90,11 @@ S_1 \subseteq S_2 \iff \forall x \in U,\ f_{S_1}(x) \le f_{S_2}(x)
 S_1 = S_2 \iff S_1 \subseteq S_2 \land S_2 \subseteq S_1
 \]
 
-**Nota práctica:** por limitación computacional en la implementación, la verificación se realiza sobre el universo finito ([0,1000]).
+La implementación se verificó sobre el universo finito [0,1000], siguiendo lo pedido en el taller.
 
 ---
 
-## 3. Implementación (resumen de código)
-
-> Archivo: `taller/ConjuntosDifusos.scala` (resumen)
+## 3. Implementación 
 
 ```scala
 package taller
@@ -212,7 +210,7 @@ sequenceDiagram
 |    3 | `loop(3)` → ...                   | compara `cd1(3)` vs `cd2(3)`                                         |
 |    4 | `loop(4)` → ...                   | compara `cd1(4)` vs `cd2(4)`                                         |
 
-> Observación: la función está anotada con `@tailrec`, por lo que la recursión es de cola (el compilador optimiza y no crece la pila real). Sin embargo, el "estado de la pila" pedido en la guía se representa arriba para fines didácticos: cada `loop(k)` representa una llamada lógica con `acc=k`.
+> La función está anotada con @tailrec, lo que confirma que la recursión es de cola. En el informe se muestra la pila como si creciera, aunque en la práctica el compilador la optimiza.
 
 ### 5.2. `inclusion` — ejemplo numérico (valores aproximados)
 
@@ -326,16 +324,11 @@ sequenceDiagram
 
 ## 7. Pila de llamados 
 
-La guía del curso exige **el estado de la pila de llamados en cada paso de la ejecución de cada función recursiva**. En este proyecto las únicas funciones recursivas son `inclusion` e `igualdad` (ambas con recursión de cola). Hemos representado la **traza lógica** (conceptual) de la pila en las tablas y diagramas de la Sección 5.
+Según la guia del taller, se incluyó **el estado de la pila de llamados en cada paso de la ejecución de cada función recursiva**. En este proyecto las únicas funciones recursivas son `inclusion` e `igualdad` (ambas con recursión de cola). Hemos representado la **traza lógica** (conceptual) de la pila en las tablas y diagramas de la Sección 5.
 
-## 7.1 Recursión de cola
-Las funciones inclusion e igualdad están implementadas con recursión de cola. Esto se garantiza porque:
-1. La llamada recursiva loop(acc + 1) aparece en la última posición de la función.
+## 7.1 Recursión de cola 
 
-2. Se anotó explícitamente con @tailrec.
-
-3. El compilador de Scala valida que efectivamente la recursión es de cola (si no, marcaría error).
-De esta forma, la ejecución no consume la pila en cada paso, sino que se optimiza como un bucle iterativo equivalente, garantizando eficiencia y evitando desbordamientos de pila.
+- Las funciones inclusion e igualdad se implementaron con recursión de cola. Esto se garantiza porque la llamada recursiva está en la última posición, se anotó con @tailrec y el compilador valida este patrón. Gracias a esto la ejecución se comporta como un ciclo optimizado, evitando el crecimiento de la pila y posibles desbordamientos.
 ---
 
 ## 8. Conclusiones
